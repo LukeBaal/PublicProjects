@@ -31,7 +31,11 @@ def print_sol(ls, n):
 
 
 def n_queen(n):
-    queens = [1, 2, 3, 4, 5, 6, 7, 8]
+    if n == 8:
+        queens = [1, 2, 3, 4, 5, 6, 7, 8]
+    elif n == 9:
+        queens = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
     used = []
 
     for a in queens:
@@ -47,8 +51,8 @@ def n_queen(n):
                         for f in queens:
                             queens.remove(f)
                             for g in queens:
+                                queens.remove(g)
                                 if n == 8:
-                                    queens.remove(g)
                                     used.append(a)
                                     used.append(b)
                                     used.append(c)
@@ -57,7 +61,6 @@ def n_queen(n):
                                     used.append(f)
                                     used.append(g)
                                     used.append(queens[0])
-
                                     # Go if solution works
                                     success = False
                                     for j in range(0, n):  # Nested Loop to compare each pair of queens
@@ -75,11 +78,49 @@ def n_queen(n):
 
                                     if success:  # If still true after each comparison, then the solution holds
                                         sol_counter.increment()
-                                        print_sol(used, n)
-                                        print "Solution #:", sol_counter.get_count()
+                                        # print_sol(used, n)
+                                        # print "Solution #:", sol_counter.get_count()
+                                        print used, sol_counter.get_count()
 
+                                    used = []
+                                elif n == 9:
+                                    for h in queens:
+                                        queens.remove(h)
+                                        used.append(a)
+                                        used.append(b)
+                                        used.append(c)
+                                        used.append(d)
+                                        used.append(e)
+                                        used.append(f)
+                                        used.append(g)
+                                        used.append(h)
+                                        used.append(queens[0])
+                                        # Go if solution works
+                                        success = False
+                                        for j in range(0, n):  # Nested Loop to compare each pair of queens
+                                            for k in range(0, n):
+                                                if j != k:  # Avoid comparison of a queen with itself
+                                                    # True if pair of queens are not in conflict
+                                                    if abs(int(used[j]) - int(used[k])) != (0 or (abs(j - k))):
+                                                        success = True
+                                                    else:
+                                                        success = False
+                                                        break  # If pair of queens are in conflict break second loop
+                                            else:
+                                                continue  # If pair of queens are NOT in conflict, continue first loop
+                                            break  # If pair of queens are in conflict break first loop
+
+                                        if success:  # If still true after each comparison, then the solution holds
+                                            sol_counter.increment()
+                                            # print_sol(used, n)
+                                            # print "Solution #:", sol_counter.get_count()
+                                            print used, sol_counter.get_count()
+
+                                        used = []
+
+                                        queens.append(h)
+                                        queens.sort()
                                 # Reset queens and used arrays
-                                used = []
                                 queens.append(g)
                                 queens.sort()
                             queens.append(f)
@@ -94,6 +135,12 @@ def n_queen(n):
             queens.sort()
         queens.append(a)
         queens.sort()
+
+start = time.time()
+sol_counter = Counter()
+n_queen(9)
+end = time.time()
+print "Time elapsed: ", end - start
 
 start = time.time()
 sol_counter = Counter()
