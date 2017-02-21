@@ -11,9 +11,8 @@ GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 LIGHT_BLUE = (128, 191, 255)
 LEFT = 1
-
-PI = 3.141592653
-
+FILE = "tree-diagram.txt"
+tree = open(FILE, "w")
 # Window size
 SIZE = (1121, 485)
 
@@ -108,7 +107,7 @@ while not done:
                 column = pos[1] // (HEIGHT + MARGIN)
 
                 nodes.append(Node([get_x(row), get_y(column)], pyg.key.name(event.key).upper()))
-
+                tree.write(nodes[-1].value)
                 # If another node is active, set it as parent for new node
                 if active is not None:
                     nodes[-1].set_parent(active)
