@@ -12,7 +12,7 @@ RED = (255, 0, 0)
 LIGHT_BLUE = (128, 191, 255)
 LEFT = 1
 FILE = "tree-diagram.txt"
-tree = open(FILE, "w")
+tree_file = open(FILE, "w")
 # Window size
 SIZE = (1121, 485)
 
@@ -61,10 +61,6 @@ class Node:
     def get_pos(self):
         return self.x, self.y
 
-    def update_pos(self, x, y):
-        self.x = x
-        self.y = y
-
     def set_parent(self, parent):
         self.parent = parent
 
@@ -105,7 +101,7 @@ while not done:
                 column = pos[1] // (HEIGHT + MARGIN)
 
                 nodes.append(Node([get_x(row), get_y(column)], pyg.key.name(event.key).upper()))
-                tree.write(nodes[-1].value)
+                tree_file.write(nodes[-1].value)
                 # If another node is active, set it as parent for new node
                 if active is not None:
                     nodes[-1].set_parent(active)
@@ -144,3 +140,4 @@ while not done:
     clock.tick(60)
 
 pyg.quit()
+tree_file.close()
