@@ -77,9 +77,7 @@ class Node:
     def draw(self):
         pyg.draw.circle(self.screen, self.color, [self.x, self.y], self.radius, self.width)
         self.screen.blit(text(self.value, self.color), [self.x-5, self.y-7])
-        # pyg.draw.line(screen, BLACK, [self.x, self.y], [self.x, self.top_y], 1)
         if self.parent is not None:
-            # print self.x, self.top_y, self.parent.get_x(), self.parent.get_bot_y()
             pyg.draw.line(self.screen, BLACK, [self.x, self.top_y], [self.parent.get_x(), self.parent.get_bot_y()], 1)
 
 
