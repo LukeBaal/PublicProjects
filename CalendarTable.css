@@ -1,0 +1,21 @@
+body {
+    font-family: verdana;
+    font-size: 16px;
+}
+h1{
+  margin-left: 25%;
+}
+table,td{
+  border: 2px solid black;
+  border-collapse: collapse;
+  padding-top: 3px;
+  padding-left: 3px;
+  padding-right:120px;
+  padding-bottom:60px;
+}
+
+th{
+  border: 2px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+}
