@@ -136,7 +136,7 @@ class Tree():
 		sself.draw_leaf(right)
 		pyg.draw.line(self.screen, right.get_color(), right.get_top_pos(), parent.get_bot_pos())
 	
-	def set_top(se;lf
+	#def set_top(se;lf
 			
 pyg.quit()
 tree_file.close()
