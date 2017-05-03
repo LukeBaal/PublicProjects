@@ -8,7 +8,7 @@ tail = [0.4,0.25,0.1,0.05,0.025,0.01,0.005,0.001,0.0005]
 file.write("n, t, prob\n")
 for n in ls:
     for item in tail:
-        file.write(str(n) + ", " + str(item) + ", " + str(st.t.ppf(item,n))+"\n")
+        file.write(str(n) + ", " + str(item) + ", " + str(st.t.ppf(item,n)*-1)+"\n")
 
 
 file.close()
