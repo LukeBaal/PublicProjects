@@ -10,7 +10,7 @@ class NeuralNetwork:
 		# 1 hidden layer hard codded, given that the multiple
 		# hidden layer runs are giving a much lower performace
 		# with the current code
-		self.hlayers = [hidden_nodes]
+		self.hlayers = [hiddennodes]
 		self.onodes = outputnodes
 
 		# Learning rate
@@ -20,12 +20,12 @@ class NeuralNetwork:
 		self.wih = np.random.normal(0.0, pow(self.hlayers[0], -0.5),
 										(self.hlayers[0], self.inodes))
 
-		self.whh = []
-		# Make weight matrices for hidden layers if needed
-		if len(self.hlayers) > 1:
-			for i in range (len(self.hlayers)-1):
-				self.whh.append(np.random.normal(0.0, pow(self.hlayers[i+1], -0.5),
-												(self.hlayers[i+1], self.hlayers[i])))
+		# self.whh = []
+		# # Make weight matrices for hidden layers if needed
+		# if len(self.hlayers) > 1:
+		# 	for i in range (len(self.hlayers)-1):
+		# 		self.whh.append(np.random.normal(0.0, pow(self.hlayers[i+1], -0.5),
+		# 										(self.hlayers[i+1], self.hlayers[i])))
 
 		# Make weight matrix for last hidden layer and output layer
 		self.who = np.random.normal(0.0, pow(self.onodes, -0.5),
@@ -52,11 +52,11 @@ class NeuralNetwork:
 		hidden_outputs = []
 		hidden_outputs.append(self.activation_fcn(hidden_inputs))
 
-		# Calculate signals for between hidden layers if needed
-		if self.whh != []:
-			for i in range(len(self.whh)):
-				hinputs = np.dot(self.whh[i], hidden_outputs[i])
-				hidden_outputs.append(self.activation_fcn(hinputs))
+		# # Calculate signals for between hidden layers if needed
+		# if self.whh != []:
+		# 	for i in range(len(self.whh)):
+		# 		hinputs = np.dot(self.whh[i], hidden_outputs[i])
+		# 		hidden_outputs.append(self.activation_fcn(hinputs))
 
 		# Calculate signals into final output layer (similar to above)
 		final_inputs = np.dot(self.who, hidden_outputs[-1])
@@ -75,17 +75,17 @@ class NeuralNetwork:
 		hidden_errors = []
 		hidden_errors.append(np.dot(self.who.T, output_errors))
 
-		# Update the weights for the links between the hidden layers if needed
-		index = 0
-		if self.whh != None:
-			for i in range(len(self.whh)-1, -1, -1):
-				#Tune weights
-				self.whh[i] += self.lr * np.dot((hidden_errors[index] * hidden_outputs[i+1] *
-							(1.0 - hidden_outputs[i+1])), np.transpose(hidden_outputs[i]))
+		# # Update the weights for the links between the hidden layers if needed
+		# index = 0
+		# if self.whh != None:
+		# 	for i in range(len(self.whh)-1, -1, -1):
+		# 		#Tune weights
+		# 		self.whh[i] += self.lr * np.dot((hidden_errors[index] * hidden_outputs[i+1] *
+		# 					(1.0 - hidden_outputs[i+1])), np.transpose(hidden_outputs[i]))
 
-				# Calculate error for previous hidden layer
-				hidden_errors.append(np.dot(self.whh[i].T, hidden_errors[index]))
-				index += 1
+		# 		# Calculate error for previous hidden layer
+		# 		hidden_errors.append(np.dot(self.whh[i].T, hidden_errors[index]))
+		# 		index += 1
 
 
 		# Update the weights for the links between the input and hidden
@@ -108,11 +108,11 @@ class NeuralNetwork:
 		hidden_outputs = []
 		hidden_outputs.append(self.activation_fcn(hidden_inputs))
 
-		# Calculate signals for between hidden layers if needed
-		if self.whh != []:
-			for i in range(len(self.whh)):
-				hinputs = np.dot(self.whh[i], hidden_outputs[i])
-				hidden_outputs.append(self.activation_fcn(hinputs))
+		# # Calculate signals for between hidden layers if needed
+		# if self.whh != []:
+		# 	for i in range(len(self.whh)):
+		# 		hinputs = np.dot(self.whh[i], hidden_outputs[i])
+		# 		hidden_outputs.append(self.activation_fcn(hinputs))
 
 		# Calculate signals into final output layer (similar to above)
 		final_inputs = np.dot(self.who, hidden_outputs[-1])
